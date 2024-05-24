@@ -13,3 +13,13 @@ export function imgTemplate(array) {
 };
 
 
+export function imagesGallery() {
+    let gallery = $('.gallery a').SimpleLightbox({
+        captionsData: 'alt',
+        captionDelay: 250
+    });
+    gallery.refresh();
+};
+
+
+
