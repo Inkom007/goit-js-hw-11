@@ -8,10 +8,15 @@ import "izitoast/dist/css/iziToast.min.css";
 
 const form = document.querySelector(".form");
 const gallery = document.querySelector(".gallery");
+const loader = document.querySelector(".loader");
+
+
 
 form.addEventListener("submit", event => {
     event.preventDefault();
-    gallery.innerHTML = '';
+    gallery.innerHTML = "";
+    
+    showLoader();
 
     const query = event.target.elements.query.value.trim();
 
@@ -25,17 +30,31 @@ form.addEventListener("submit", event => {
                     position: 'topRight'
                 });
                 return;
+                
             }
             else {
+                
                 const markup = imgTemplate(data.hits);
                 gallery.innerHTML = markup;
+                showLoader();
+                imagesGallery();
+                
             }
         })
     
         .catch(error => console.log(error))
         .finally(() => {
             event.target.reset();
+             hideLoader();
         })
+   
 });
 
 
+function showLoader() {
+    loader.style.display = "block";
+};
+
+function hideLoader() {
+    loader.style.display = "none";
+};
